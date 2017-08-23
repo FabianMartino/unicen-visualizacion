@@ -1,0 +1,18 @@
+body{
+  color: white;
+  background-color: #181818;
+}
+
+#banner{
+
+    width: 100%;
+  }
+
+#canvasOriginal{
+  width:auto;
+  height:auto;
+}
+#canvasResultado{
+  width:auto;
+  height:auto;
+}

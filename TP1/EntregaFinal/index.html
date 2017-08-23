@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Pagina de filtros para fotos</title>
+		<link rel="stylesheet" href="disenio\bootstrap.css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="disenio\estiloPagina.css" media="screen" title="no title" charset="utf-8">
+		<script src="comportamiento\jquery.js"></script>
+	</head>
+		<div class="banner">
+			<img id="banner" src="imagenes\banner.jpg" alt="Banner de la pagina" />
+		</div>
+		<div class="contenido">
+			<h2>Paso 1</h2>
+			<span>carge la imagen a la que quiere aplicar un filtro</span>
+			<div class="row">
+				<div class="original">
+				  <div class="col-sm-6">
+						<div class="">
+							<canvas id="canvasOriginal" height="350" width="350" style="border:#d2d2d2 solid 1px;" />
+						</div>
+						<!-- <form action="index.html" method="post" enctype="multipart/form-data">
+							<div class="form-group">
+								<div class="col-xs-offset-3 col-xs-9"> -->
+			          	<input type="file" name="imagen" value="" id="imagen">
+								<!-- </div>
+			        </div>
+						</form> -->
+					</div>
+				</div>
+				<div class="resultado">
+				  <div class="col-sm-6">
+						<canvas id="canvasResultado" height="350" width="350" style="border:#d2d2d2 solid 1px;" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="comportamiento\filtros.js" charset="utf-8"></script>
+	<script src="comportamiento\funciones.js" charset="utf-8"></script>
+  <script src="comportamiento\bootstrap.min.js" charset="utf-8"></script>
+</html>
