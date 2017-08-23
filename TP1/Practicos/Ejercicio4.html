@@ -8,13 +8,13 @@
 	</body>
 	<script>
 			 var ctx = document.getElementById("canvas").getContext("2d");
-			 var width = 500;
-			 var heigth = 300;
+			 var width = 800;
+			 var heigth = 500;
 		   var imageData = ctx.createImageData(width, heigth);
 			 var proporcion = 0;
 			 for(x=0; x<width; x++){
 				 for(y=0; y<heigth; y++){
-				 	 proporcion = Math.floor((y/heigth)*255);
+				 	 proporcion = Math.floor((x/width)*255);
 					 if (Math.floor(x<(width/2))){
 						 setPixel(imageData, x, y, proporcion , proporcion, 0, 255);
 					 }

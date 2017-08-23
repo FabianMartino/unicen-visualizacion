@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
+	</body>
+	<script>
+		var ctx = document.getElementById("canvas").getContext("2d");
+		var width = 900;
+		var heigth = 600;
+		var image1 = new Image();
+		image1.src = "img_nombres_para_perros_originales_y_bonitos_5579_paso_1_600.jpg";
+
+		image1.onload = function(){
+			myDrawImageMethod(this);
+		}
+
+		function myDrawImageMethod(image){
+			ctx.drawImage(image, 0, 0, this.width/2,this.heigth/2);
+			imageData1 = ctx.getImageData(0, 0, this.width, this.heigth);
+			imageData2 = ctx.getImageData(0, 0, this.width, this.heigth);
+			imageData3 = ctx.getImageData(0, 0, this.width, this.heigth);
+
+			var proporcion = 0;
+			for(x=0; x<width; x++){
+				for(y=0; y<heigth; y++){
+						proporcion = (getRed(imageData1, x ,y)+getGreen(imageData1, x ,y)+getBlue(imageData1, x ,y))/3;
+						setPixel(imageData1, x, y, proporcion , proporcion, proporcion, getAlpha(imageData1, x ,y));
+				}
+			}
+			ctx.putImageData(imageData1, this.width/2, 0);
+
+			for(x=0; x<width; x++){
+				for(y=0; y<heigth; y++){
+						setPixel(imageData2, x, y, 255-getRed(imageData2, x ,y) , 255-getGreen(imageData2, x ,y), 255-getBlue(imageData2, x ,y), getAlpha(imageData2, x ,y));
+				}
+			}
+			ctx.putImageData(imageData2, 0, this.heigth/2);
+
+			for(x=0; x<width; x++){
+				for(y=0; y<heigth; y++){
+						setPixel(imageData3, x, y, getGreen(imageData3, x ,y) , getBlue(imageData3, x ,y), getRed(imageData3, x ,y), getAlpha(imageData2, x ,y));
+				}
+			}
+			ctx.putImageData(imageData3, this.width/2, this.heigth/2);
+		}
+
+		function getRed(imageData, x ,y){
+			return imageData.data[(x + y * imageData.width)*4+0];
+		}
+		function getGreen(imageData, x ,y){
+			return imageData.data[(x + y * imageData.width)*4+1];
+		}
+		function getBlue(imageData, x ,y){
+			return imageData.data[(x + y * imageData.width)*4+2];
+		}
+		function getAlpha(imageData, x ,y){
+			return imageData.data[(x + y * imageData.width)*4+3];
+		}
+
+		function setPixel(imageData, x, y, r, g , b, a){
+			index = (x + y * imageData.width)*4;
+			imageData.data[index+0] = r;
+			imageData.data[index+1] = g;
+			imageData.data[index+2] = b;
+			imageData.data[index+3] = a;
+		}
+	</script>
+</html>
