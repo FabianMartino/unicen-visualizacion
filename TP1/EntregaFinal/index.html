@@ -12,11 +12,12 @@
 			<img id="banner" src="imagenes\banner.jpg" alt="Banner de la pagina" />
 		</div>
 		<div class="contenido">
-			<h2>Paso 1</h2>
-			<span>carge la imagen a la que quiere aplicar un filtro</span>
+
 			<div class="row">
 				<div class="original">
 				  <div class="col-sm-6">
+						<h2>Imagen original</h2>
+						<span>carge la imagen a la que quiere aplicar un filtro</span>
 						<div class="">
 							<canvas id="canvasOriginal" height="350" width="350" style="border:#d2d2d2 solid 1px;" />
 						</div>
@@ -25,15 +26,19 @@
 				</div>
 				<div class="resultado">
 				  <div class="col-sm-6">
-						<canvas id="canvasResultado" height="350" width="350" style="border:#d2d2d2 solid 1px;" /></canvas>
+						<h2>Imagen a la que se le aplican filtros</h2>
+						<span>Esta imagen es una vista previa con filtros aplicado</span>
+						<div class="">
+							<canvas id="canvasResultado" height="350" width="350" style="border:#d2d2d2 solid 1px;" /></canvas>
+						</div>
 					</div>
 					<a id="downloadLnk" download="Foto con filtro.jpg"><button type="button" name="button">Descargar</button></a>
 				</div>
 			</div>
 		</div>
 		<div class="filtros">
-			<h2>Paso 2</h2>
-			<span>Elija el filtro que desea</span>
+			<h2>Filtros aplicables</h2>
+			<span>Elija el filtro que desea a su imagen</span>
 			<div class="row">
 				<div class="gallery_product col-lg-1 col-md-1 col-sm-1 col-xs-1">
 						<img onclick="f_blancoNegro()" src="imagenes\BlancoNegro.jpg" alt="imagen blanco y negro" class="img-responsive">
@@ -79,26 +84,6 @@
 
 				<div class="gallery_product col-lg-1 col-md-1 col-sm-1 col-xs-1">
 						<img onclick="f_sobel()" src="imagenes\Detecionbordes.jpg" alt="imagen con detecion de bordes" class="img-responsive">
-				</div>
-
-				<div class="gallery_product col-lg-1 col-md-1 col-sm-1 col-xs-1">
-						<img src="http://fakeimg.pl/365x365/" class="img-responsive">
-				</div>
-
-				<div class="gallery_product col-lg-1 col-md-1 col-sm-1 col-xs-1">
-						<img src="http://fakeimg.pl/365x365/" class="img-responsive">
-				</div>
-
-				<div class="gallery_product col-lg-1 col-md-1 col-sm-1 col-xs-1">
-						<img src="http://fakeimg.pl/365x365/" class="img-responsive">
-				</div>
-
-				<div class="gallery_product col-lg-1 col-md-1 col-sm-1 col-xs-1">
-						<img src="http://fakeimg.pl/365x365/" class="img-responsive">
-				</div>
-
-				<div class="gallery_product col-lg-1 col-md-1 col-sm-1 col-xs-1">
-						<img src="http://fakeimg.pl/365x365/" class="img-responsive">
 				</div>
 			</div>
 		</div>

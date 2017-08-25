@@ -3,6 +3,10 @@ body{
   background-color: #181818;
 }
 
+.filtros{
+  background-color: #202020;
+}
+
 #banner{
 
     width: 100%;
@@ -107,6 +111,10 @@ body{
     -moz-user-select: -moz-none;
     -o-user-select: none;
     user-select: none;
+}
+
+#downloadLnk{
+  color: black;
 }
 
 .range input[type="range"] {

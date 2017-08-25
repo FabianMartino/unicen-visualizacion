@@ -4,7 +4,9 @@
     var ctx2 = document.getElementById("canvasResultado").getContext("2d");
     var image1 = new Image();
     image1.src = "default.jpg";
+
     image1.onload = function(){
+      determinarTamano(image1);
 			myDrawImageMethod(this);
 		};
 
@@ -22,23 +24,40 @@
 
     });
 
-
+    function determinarTamano(img){
+      var dif_ancho = 0;
+      var dif_alto = 0;
+      if (img.width<350) {
+        ancho = img.width;
+      }
+      else {
+        ancho = 350;
+        dif_ancho = 100-350*100/img.width;
+      }
+      if (img.height<350) {
+        alto = img.height;
+      }
+      else {
+        alto = 350;
+        dif_alto = 100-350*100/img.height;
+      }
+      if ((dif_ancho-dif_alto)!=0) {
+        if (dif_ancho<dif_alto) {
+          dif_alto = dif_alto-dif_ancho;
+          ancho = dif_alto*ancho/100;
+        }
+        else {
+          dif_alto = dif_alto-dif_ancho;
+          dif_ancho = dif_ancho-dif_alto;
+          alto = dif_ancho*alto/100;
+        }
+      }
+    }
 
   function fileOnload(e){
     var $img = $('<img>', { src: e.target.result });
     $img.load(function() {
-      if (this.width<350) {
-        ancho = this.width;
-      }
-      else {
-        ancho = 350;
-      }
-      if (this.height<350) {
-        alto = this.height;
-      }
-      else {
-        alto = 350;
-      }
+      determinarTamano(this);
       ctx1.drawImage(this, 0, 0, ancho, alto);
       ctx2.drawImage(this, 0, 0, ancho, alto);
   });
@@ -54,18 +73,6 @@
 
   }
   function myDrawImageMethod(image){
-    if (image.width<350) {
-      ancho = image.width;
-    }
-    else {
-      ancho = 350;
-    }
-    if (image.height<350) {
-      alto = image.height;
-    }
-    else {
-      alto = 350;
-    }
     ctx1.drawImage(image, 0, 0,ancho,alto);
     ctx2.drawImage(image, 0, 0,ancho,alto);
   }
