@@ -4,11 +4,17 @@ body{
 }
 
 .filtros{
+  border-color: #000000;
+  border-radius: 5px;
   background-color: #202020;
 }
 
-#banner{
+.contenido span{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
+#banner{
     width: 100%;
   }
 
