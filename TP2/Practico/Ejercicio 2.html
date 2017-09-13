@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" /></canvas>
+	</body>
+	<script>
+			function Circulo(x,y,r,color){
+				this.posX = x;
+				this.posY = y;
+				this.radio = r;
+				this.color = color;
+			}
+
+			Circulo.prototype.getRadio = function(){
+				alert(this.radio);
+			};
+			Circulo.prototype.pintar = function () {
+				ctx.fillStyle = this.color;
+				ctx.beginPath();
+				ctx.arc(this.posX,this.posY,this.radio,0,Math.PI *2);
+				ctx.fill();
+				ctx.closePath();
+			};
+
+			var ctx = document.getElementById("canvas").getContext("2d");
+			var Cir = new Circulo(450,300,100,"#ff0000");
+			var Cir2 = new Circulo(0,0,100,"#0000ff");
+
+			//Cir.getRadio();
+			Cir.pintar();
+			Cir2.pintar();
+
+			//
+			// function circulo(){
+			// 	this.posX = 450;
+			// 	this.posY = 300;
+			// 	this.radio = 100;
+			// 	this.color = '#ffffff';
+			// }
+
+
+
+
+			function setPixel(imageData, x, y, r, g , b, a){
+				index = (x + y * imageData.width)*4;
+				imageData.data[index+0] = r;
+				imageData.data[index+1] = g;
+				imageData.data[index+2] = b;
+				imageData.data[index+3] = a;
+			}
+	</script>
+</html>

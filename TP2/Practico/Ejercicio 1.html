@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" /></canvas>
+			<p id="texto">hola, arrastra y cambio de color</p>
+			<p id="T">test</p>
+	</body>
+	<script>
+			var ctx = document.getElementById("canvas").getContext("2d");
+
+			document.getElementById("canvas").addEventListener("click",pintarCanvas);
+			document.getElementById("texto").addEventListener("mouseover",pintarTexto);
+			document.getElementById("T").addEventListener("dblclick",popup);
+
+			function popup(){
+				alert('chau');
+			}
+
+			function pintarTexto(){
+				alert('hola');
+			}
+		//	canvas.onclick = pintarCanvas();
+			function pintarCanvas(){
+				alert('hola');
+				imageData = ctx.getImageData(0,0,900,600);
+				for(x=0; x<900; x++){
+					for(y=0; y<600; y++){
+						setPixel(imageData, 155,155,155,255);
+					}
+				}
+			ctx.putImageData(imageData, 0, 0);
+			}
+			function setPixel(imageData, x, y, r, g , b, a){
+				index = (x + y * imageData.width)*4;
+				imageData.data[index+0] = r;
+				imageData.data[index+1] = g;
+				imageData.data[index+2] = b;
+				imageData.data[index+3] = a;
+			}
+	</script>
+</html>

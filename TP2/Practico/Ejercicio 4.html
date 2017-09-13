@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" /></canvas>
+	</body>
+	<script>
+			function Circulo(x,y,r,color,id){
+				this.id = id;
+				this.posX = x;
+				this.posY = y;
+				this.radio = r;
+				this.color = color;
+			}
+
+			Circulo.prototype.getRadio = function(){
+				alert(this.radio);
+			};
+			Circulo.prototype.pintar = function () {
+				ctx.fillStyle = this.color;
+				ctx.beginPath();
+				ctx.arc(this.posX,this.posY,this.radio,0,Math.PI *2);
+				ctx.fill();
+				ctx.closePath();
+			};
+
+			function Punto(x,y,color){
+				this.x = x;
+				this.y = y;
+				this.color = color;
+			}
+			Punto.prototype.pintar = function () {
+				ctx.fillStyle = this.color;
+				ctx.beginPath();
+				ctx.arc(this.x,this.y,5,0,Math.PI *2);
+				ctx.fill();
+				ctx.closePath();
+			};
+			Punto.prototype.pertenece = function (posX, posY, radio, nombre) {
+				var temp = Math.sqrt(Math.pow(this.x-posX,2)+(Math.pow(this.y-posY,2)));
+				if (temp>radio) {
+					alert('esta fuera de '+ nombre);
+				}
+				else {
+					alert('pertenece a '+nombre);
+				}
+			}
+
+
+			 var ctx = document.getElementById("canvas").getContext("2d");
+			var Cir = new Circulo(450,300,100,"#ff0000","circulo1");
+			var Cir2 = new Circulo(0,0,100,"#0000ff","circulo2");
+			var Cir3 = new Circulo(200,200,100,"#000000","circulo3");
+			var P = new Punto(329,215,"#00ff00");
+
+			//Cir.getRadio();
+			Cir.pintar();
+			Cir2.pintar();
+			Cir3.pintar();
+
+			// P.pintar();
+			// P.pertenece(Cir.posX,Cir.posY,Cir.radio,"Circulo 1");
+			// P.pertenece(Cir3.posX,Cir3.posY,Cir3.radio, "Circulo 3");
+
+
+			function circulo(){
+				this.posX = 450;
+				this.posY = 300;
+				this.radio = 100;
+				this.color = '#ffffff';
+			}
+			var click = false;
+
+			function redibujar(){
+				ctx.fillStyle = "#ffffff";
+ 			 	ctx.fillRect(0, 0, 900, 600);
+				Cir.pintar();
+				Cir2.pintar();
+				Cir3.pintar();
+			}
+			var identificador = "";
+			document.getElementById("canvas").addEventListener("mousedown",mouseDown);
+			document.getElementById("canvas").addEventListener("mousemove",mouseMove);
+			document.getElementById("canvas").addEventListener("mouseup",mouseUp);
+
+			function mouseDown(e){
+				click = true;
+				var x = e.clientX;
+				var y = e.clientY;
+				if (click) {
+					if (Cir.radio>=Math.sqrt(Math.pow(x-Cir.posX,2)+(Math.pow(y-Cir.posY,2)))) {
+						identificador = Cir.id;
+					}
+					else {
+							if (Cir2.radio>=Math.sqrt(Math.pow(x-Cir2.posX,2)+(Math.pow(y-Cir2.posY,2)))) {
+								identificador = Cir2.id;
+							}
+							else {
+								if (Cir3.radio>=Math.sqrt(Math.pow(x-Cir3.posX,2)+(Math.pow(y-Cir3.posY,2)))) {
+									identificador = Cir3.id;
+								}
+								else {
+									click = false;
+								}
+							}
+					}
+				}
+			}
+
+			function mouseMove(e){
+				if (click) {
+					var x = e.clientX;
+					var y = e.clientY;
+					if (click) {
+						if (identificador==Cir.id) {
+							Cir.posX = x;
+							Cir.posY = y;
+						}
+						else {
+								if (identificador==Cir2.id) {
+									Cir2.posX = x;
+									Cir2.posY = y;
+								}
+								else {
+									if (identificador==Cir3.id) {
+										Cir3.posX = x;
+										Cir3.posY = y;
+									}
+									else {
+										click = false;
+									}
+								}
+						}
+					}
+					if (click) {
+						redibujar();
+					}
+				}
+			}
+
+			function mouseUp(e){
+				click = false;
+			}
+
+			// 	var x = e.clientX;
+			// 	var y = e.clientY;
+			// 	var color = '#'+Math.floor(Math.random()*16777215).toString(16);
+			// 	var Cir4 = new Circulo(x,y,50,color);
+			// 	Cir4.pintar();
+			function setPixel(imageData, x, y, r, g , b, a){
+				index = (x + y * imageData.width)*4;
+				imageData.data[index+0] = r;
+				imageData.data[index+1] = g;
+				imageData.data[index+2] = b;
+				imageData.data[index+3] = a;
+			}
+	</script>
+</html>
