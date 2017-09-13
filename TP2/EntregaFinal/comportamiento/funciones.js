@@ -72,6 +72,49 @@ Rectangulo.prototype.moverFigura = function(x,y){
   this.posY = y-(this.alto/2);
 }
 
+function Triangulo(xa,xb,xc,ya,yb,yc,color,tipo,i){
+  this.posCorrecta = false;
+  this.tipo = tipo;
+  this.color = color;
+  this.posXA = xa;
+  this.posXB = xb;
+  this.posXC = xc;
+  this.posYA = ya;
+  this.posYB = yb;
+  this.posYC = yc;
+  figuras[i] = this;
+}
+
+Triangulo.prototype.detector = function(x,y) {
+  if ((this.posXC <= x) && (x <= this.posXB) && (this.posYA <=y) && (y <= this.posYB)){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+Triangulo.prototype.pintar = function(color){
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.moveTo(this.posXA,this.posYA);
+  ctx.lineTo(this.posXB,this.posYB);
+  ctx.lineTo(this.posXC,this.posYC);
+  ctx.fill();
+  ctx.closePath();
+
+}
+
+Triangulo.prototype.moverFigura = function(x,y){
+  var alto = this.posYB - this.posYA;
+  var medio =  this.posXB - this.posXC
+  this.posXA = parseInt(x);
+  this.posXB = x+(Math.floor(medio/2));
+  this.posXC = x-(Math.floor(medio/2));
+  this.posYA = y-(Math.floor(alto/2));
+  this.posYB = y+(Math.floor(alto/2));
+  this.posYC = y+(Math.floor(alto/2));
+}
 
 
 function Tablero(){
@@ -105,7 +148,12 @@ Tablero.prototype.cargarEspacios = function (){
       this.espacios[i] = new Circulo(copia.x,copia.y,copia.radio,copia.color,copia.tipo,copia.i)
     }
     else {
-      this.espacios[i] = new Rectangulo(copia.x,copia.y,copia.largo,copia.alto,copia.color,copia.tipo,copia.i);
+      if (copia.tipo=="rectangulo") {
+        this.espacios[i] = new Rectangulo(copia.x,copia.y,copia.largo,copia.alto,copia.color,copia.tipo,copia.i);
+      }
+      else {
+        this.espacios[i] = new Triangulo(copia.posXA,copia.posXB,copia.posXC,copia.posYA,copia.posYB,copia.posYC,copia.color,copia.tipo,copia.i);
+      }
     }
   }
 };
@@ -125,17 +173,38 @@ Tablero.prototype.crearTablero = function (){
       }
     }
     else {
-      this.espacios[i].posX = x;
-      this.espacios[i].posY = y;
-      this.espacios[i].alto+=20;
-      this.espacios[i].largo+=20;
-      this.espacios[i].pintar(this.espacios[i].color);
-      this.espacios[i].alto-=20;
-      this.espacios[i].largo-=20;
-      this.espacios[i].posX = x+10;
-      this.espacios[i].posY = y+10;
-      if (!this.espacios[i].posCorrecta) {
-        this.espacios[i].pintar("#000000");
+      if (this.espacios[i].tipo=="rectangulo") {
+        this.espacios[i].posX = x;
+        this.espacios[i].posY = y;
+        this.espacios[i].alto+=20;
+        this.espacios[i].largo+=20;
+        this.espacios[i].pintar(this.espacios[i].color);
+        this.espacios[i].alto-=20;
+        this.espacios[i].largo-=20;
+        this.espacios[i].posX = x+10;
+        this.espacios[i].posY = y+10;
+        if (!this.espacios[i].posCorrecta) {
+          this.espacios[i].pintar("#000000");
+        }
+      }
+      else {
+        var alto = this.espacios[i].posYB - this.espacios[i].posYA;
+        var medio =  this.espacios[i].posXB - this.espacios[i].posXC;
+        this.espacios[i].posXA = 10+parseInt(x+(Math.floor(medio/2)));
+        this.espacios[i].posXB = 10+parseInt(x+(Math.floor(medio)));
+        this.espacios[i].posXC = parseInt(x);
+        this.espacios[i].posYA = parseInt(y);
+        this.espacios[i].posYB = 10+parseInt(y+(Math.floor(alto)));
+        this.espacios[i].posYC = 10+parseInt(y+(Math.floor(alto)));
+        this.espacios[i].pintar(this.espacios[i].color);
+        this.espacios[i].posXB -= 5;
+        this.espacios[i].posXC += 5;
+        this.espacios[i].posYA += 5;
+        this.espacios[i].posYB -= 5;
+        this.espacios[i].posYC -= 5;
+        if (!this.espacios[i].posCorrecta) {
+          this.espacios[i].pintar("#000000");
+        }
       }
     }
     x+=150;
@@ -166,6 +235,7 @@ var figuras = [];
 var ctx = document.getElementById("canvas").getContext("2d");
 var Tab = new Tablero();
 
+
 function iniciarJuego(valor) {
   dificultad = parseInt(valor);
   figuras = [];
@@ -182,18 +252,25 @@ function iniciarJuego(valor) {
 
 function crearFiguras(){
   for (var i = 0; i < dificultad; i++) {
-    var j = Math.floor(Math.random() * 10 );
+    var j = Math.floor(Math.random() * 15 );
     var color = 'rgb(' + (Math.floor(Math.random() * 250)+6) + ',' + (Math.floor(Math.random() * 250)+6) + ',' + (Math.floor(Math.random() * 250)+6) + ')';
     var x = 0;
     var y = 0;
-    if (j >= 5) {
-      var radio = 37 + (Math.floor(Math.random() * 6))*5;
+    if (j < 5) {
+      var radio = 5 + (Math.floor(Math.random() * 6))*10;
       figuras[i] = new Circulo(130,130,radio,color,"circulo",i)
     }
     else {
-      var alto = 99 + (Math.floor(Math.random() * 6))*5;
-      var largo = 99 + (Math.floor(Math.random() * 6))*5;
-      figuras[i] = new Rectangulo(300,100,alto,largo,color,"rectangulo",i)
+      if (j<10) {
+        var alto = 70 + (Math.floor(Math.random() * 6))*10;
+        var largo = 70 + (Math.floor(Math.random() * 6))*10;
+        figuras[i] = new Rectangulo(300,100,alto,largo,color,"rectangulo",i);
+      }
+      else {
+        var alto = 5 + (Math.floor(Math.random() * 6))*10;
+        var medio = 5 + (Math.floor(Math.random() * 6))*10;
+        figuras[i] = new Triangulo(x+medio,x+(medio*2),x,y,y+(alto*2),y+(alto*2),color,"triangulo",i);
+      }
     }
   }
   Tab.cargarEspacios();
