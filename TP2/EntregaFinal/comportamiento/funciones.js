@@ -160,6 +160,31 @@ Tablero.prototype.cargarEspacios = function (){
 
 Tablero.prototype.crearTablero = function (){
   var x = 600;
+  ctx.fillStyle = "#cccc00";
+  ctx.beginPath();
+  ctx.fillRect(x,0, 1200, 600);
+  ctx.fill();
+  ctx.closePath();
+  for (var i = 0; i < 5; i++) {
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000000";
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, 600);
+    ctx.stroke();
+    x+=150;
+  }
+  x=600;
+  var y = 0;
+  for (var i = 0; i < 5; i++) {
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "#000000";
+    ctx.beginPath();
+    ctx.moveTo(600, y);
+    ctx.lineTo(1200, y);
+    ctx.stroke();
+    y+=150;
+  }
   var y = 3;
   for (var i = 0; i < this.espacios.length; i++) {
     if (this.espacios[i].tipo=="circulo") {
@@ -251,26 +276,32 @@ function iniciarJuego(valor) {
 }
 
 function crearFiguras(){
+  var x = 0;
+  var y = 10;
   for (var i = 0; i < dificultad; i++) {
     var j = Math.floor(Math.random() * 15 );
     var color = 'rgb(' + (Math.floor(Math.random() * 250)+6) + ',' + (Math.floor(Math.random() * 250)+6) + ',' + (Math.floor(Math.random() * 250)+6) + ')';
-    var x = 0;
-    var y = 0;
+
     if (j < 5) {
       var radio = 5 + (Math.floor(Math.random() * 6))*10;
-      figuras[i] = new Circulo(130,130,radio,color,"circulo",i)
+      figuras[i] = new Circulo(x+radio,y+radio,radio,color,"circulo",i)
     }
     else {
       if (j<10) {
         var alto = 70 + (Math.floor(Math.random() * 6))*10;
         var largo = 70 + (Math.floor(Math.random() * 6))*10;
-        figuras[i] = new Rectangulo(300,100,alto,largo,color,"rectangulo",i);
+        figuras[i] = new Rectangulo(x,y,alto,largo,color,"rectangulo",i);
       }
       else {
         var alto = 5 + (Math.floor(Math.random() * 6))*10;
         var medio = 5 + (Math.floor(Math.random() * 6))*10;
         figuras[i] = new Triangulo(x+medio,x+(medio*2),x,y,y+(alto*2),y+(alto*2),color,"triangulo",i);
       }
+    }
+    y+=150;
+    if (y>=600) {
+      y=0;
+      x+=150;
     }
   }
   Tab.cargarEspacios();
