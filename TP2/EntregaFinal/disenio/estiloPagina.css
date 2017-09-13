@@ -1,6 +1,5 @@
 body{
-  color: white;
-  background-color: #181818;
+   background: green;
 }
 
 #banner{
@@ -10,4 +9,17 @@ body{
 
 button{
   color: black;
+}
+
+.well{
+  border-radius: 0 !important;
+  font-size: 13px !important;
+  padding: 0 !important;
+}
+.display{
+  font-size: 15px;
+  padding: 0 !important;
+}
+.display>span{
+  font-weight: bold;
 }

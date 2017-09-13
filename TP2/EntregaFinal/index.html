@@ -12,12 +12,19 @@
 			<img id="banner" src="imagenes\banner.jpg" alt="Banner de la pagina" />
 		</div>
 		<div class="row">
-			<div class="col-sm-2">
+			<div class="original">
+				<div class="col-sm-6">
+					<button type="button" onclick="iniciarJuego(3)" name="facil">facil</button>
+					<button type="button" onclick="iniciarJuego(9)" name="medio">medio</button>
+					<button type="button" onclick="iniciarJuego(16)" name="dificil">dificil</button>
+				</div>
 			</div>
-			<div class="col-sm-8">
-				<button type="button" onclick="iniciarJuego(3)" name="facil">facil</button>
-				<button type="button" onclick="iniciarJuego(9)" name="medio">medio</button>
-				<button type="button" onclick="iniciarJuego(16)" name="dificil">dificil</button>
+			<div class="well">
+				<div class="col-sm-6">
+					<div class=" display text-center">
+						<span id="hor">00</span>:<span id="min">00</span>:<span id="seg">00</span>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="contenido">

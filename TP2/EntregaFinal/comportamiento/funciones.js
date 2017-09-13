@@ -146,6 +146,18 @@ Tablero.prototype.crearTablero = function (){
   }
 }
 
+Tablero.prototype.terminoPartida = function(){
+  clearInterval(cron);
+  iniciado = false;
+  var grd = ctx.createLinearGradient(0,0,1200,0);
+  grd.addColorStop(0,"blue");
+  grd.addColorStop(1,"white");
+  ctx.fillStyle = grd;
+  ctx.fillRect(0,0,1200,600);
+  ctx.font = "60px Arial";
+  ctx.strokeText("Ganaste en con un tiempo de "+sv_hor+":"+sv_min+":"+sv_seg+".",100,300);
+}
+
 /////****************************************************************///////
 var dificultad = 0;
 var click = false;
@@ -159,6 +171,13 @@ function iniciarJuego(valor) {
   figuras = [];
   Tab = new Tablero();
   crearFiguras();
+  sv_min = 00;
+  sv_hor = 00;
+  sv_seg = 00;
+  seg.innerHTML = "00";
+  min.innerHTML = "00";
+  hor.innerHTML = "00";
+  if(!iniciado){ iniciado = true; start_cron(); }
 }
 
 function crearFiguras(){
@@ -199,8 +218,9 @@ document.getElementById("canvas").addEventListener("mouseup",mouseUp);
 
 function mouseDown(e){
   click = true;
-  var x = e.clientX;
-  var y = e.clientY;
+  var rect = canvas.getBoundingClientRect();
+  var x = e.clientX - rect.left;
+  var y = e.clientY - rect.top;
   if (click) {
     for (var i = 0; i < figuras.length; i++) {
       if (!figuras[i].posCorrecta) {
@@ -217,8 +237,9 @@ function mouseDown(e){
 
 function mouseMove(e){
   if (click) {
-    var x = e.clientX;
-    var y = e.clientY;
+    var rect = canvas.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
     for (var i = 0; i < figuras.length; i++) {
       if (seleccionado>=0) {
         figuras[seleccionado].moverFigura(x,y);
@@ -231,13 +252,24 @@ function mouseMove(e){
 
 function mouseUp(e){
   if (click) {
-    var x = e.clientX;
-    var y = e.clientY;
+    var rect = canvas.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
     for (var i = 0; i < Tab.espacios.length; i++) {
       if ((Tab.espacios[i].detector(x,y))&&(Tab.relacion[i]==seleccionado)) {
         Tab.espacios[i].posCorrecta = true;
         figuras[seleccionado].posCorrecta = true;
         redibujar();
+        var verificar = true;
+        for (var j = 0; j < figuras.length; j++) {
+          if (!figuras[j].posCorrecta) {
+            verificar = false;
+          }
+        }
+        Tab.completado = verificar;
+        if (Tab.completado) {
+          Tab.terminoPartida();
+        }
       }
     }
     click = false;
@@ -247,4 +279,37 @@ function mouseUp(e){
   seleccionado = -1;
   for (var i = 0; i < figuras.length; i++) {
   }
+}
+
+
+var cron;
+ var sv_min = 00;
+ var sv_hor = 00;
+ var sv_seg = 00;
+ var seg = document.getElementById('seg');
+ var min = document.getElementById('min');
+ var hor = document.getElementById('hor');
+ var iniciado = false;
+
+// $("#btn_play").click(function(){
+//  if(!iniciado){ iniciado = true; start_cron(); }
+// });
+
+function start_cron(){
+cron = setInterval(function(){
+ sv_seg++;
+ if(sv_seg < 60){
+   if(sv_seg < 10){ seg.innerHTML = "0"+sv_seg; }else{ seg.innerHTML = sv_seg; }
+ }else{
+   sv_seg = 0; seg.innerHTML = "00";
+   sv_min++;
+   if(sv_min < 60){
+     if(sv_min < 10){ min.innerHTML = "0"+sv_min; }else{ min.innerHTML = sv_min; }
+   }else{
+     sv_min = 0; min.innerHTML = "00";
+     sv_hor++;
+     if(sv_hor < 10){ hor.innerHTML = "0"+sv_hor; }else{ hor.innerHTML = sv_hor; }
+   }
+ }
+}, 1000);
 }
