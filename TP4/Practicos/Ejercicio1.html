@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Template</title>
+	</head>
+    <div id="imagen" onclick="rotar()">
+      <canvas id="canvas" width="900" height="600" style="border:#000 solid 1px;" />
+    </div>
+	</body>
+	<script>
+       var mov = 0;
+		   var ctx = document.getElementById("canvas").getContext("2d");
+			 ctx.fillStyle = "#000000";
+			 ctx.fillRect(250, 25, 200, 300);
+			 ctx.beginPath();
+			 ctx.arc(450, 110, 100, Math.PI * 1/2, Math.PI * 3/2);
+			 ctx.lineWidth = 15;
+			 ctx.lineCap = 'round';
+			 ctx.strokeStyle = 'rgba(255, 127, 0, 0.5)';
+			 ctx.stroke();
+
+       function rotar(){
+         var rand = Math.random();
+         if (rand<0.5) {
+           mov += 5;
+           var ima = document.getElementById("canvas");
+           ima.style.transform += "rotate("+mov+"deg)";
+         }
+         else {
+           mov += 50;
+           var ima = document.getElementById("canvas");
+           ima.style.transform += "translate("+mov+"px,"+mov+"px)";
+         }
+       }
+	</script>
+</html>

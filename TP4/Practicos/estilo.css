@@ -1,0 +1,67 @@
+/*.imagen{
+  height: 100px;
+  width: 100px;
+  background-color: blue;
+  transition: 2s;
+}
+
+.imagen:hover{
+  background-color: red;
+}
+.imagen p:hover{
+  color: white;
+  transition: 2s;
+  color: yellow;
+  font-size: 32px;
+}
+
+.imagen p:active{
+  color: purple;
+}
+
+.imagen:active{
+  height: 200px;
+  width: 200px;
+  background-color: green;
+}
+.reloj{
+  width: 500;
+  height: 500;
+  background-color: gray;
+  }
+
+.seg{
+  position: absolute;
+left: 300px;
+top: 100px;
+z-index: -1;
+
+}
+.min{
+  position: absolute;
+left: 300px;
+top: 160px;
+z-index: 0;
+}
+.hora{
+  position: absolute;
+  left: 300px;
+  top: 197px;
+  z-index: 1;
+}
+
+@keyframe moveraguja{
+  from{rotate(0deg);}
+  to{rotate(360deg);}
+}*/
+
+.personaje{
+  width: 30px;
+  height: 37.666px;
+  background: url('pj.png')left center;
+  animation: correr 0.6s steps(6) infinite;
+}
+
+@keyframes correr{
+  100%{background-position: -226px;}
+}

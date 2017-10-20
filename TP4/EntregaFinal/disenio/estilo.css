@@ -1,0 +1,42 @@
+#personaje{
+  width: 63px;
+  height: 62px;
+  background: url('hero.png')0px 612px;
+  background-position: 0px 0px;
+
+}
+
+#personaje correr{
+    width: 63px;
+    height: 62px;
+    background: url('hero.png')0px 612px;
+    animation: correr 0.6s steps(9);
+
+  }
+
+  @keyframes correr{
+    0%{background-position-y: -705px}
+    100%{background-position-x: -578px;background-position-y: -705px}
+  }
+
+#personaje saltar{
+    width: 30px;
+    height: 37.666px;
+    background: url('pj.png')left center;
+    animation: correr 0.6s steps(6);
+  }
+
+  @keyframes saltar{
+    100%{background-position: -226px;}
+  }
+#personaje atacar{
+    width: 30px;
+    height: 37.666px;
+    background: url('pj.png')left center;
+    animation: correr 0.6s steps(6);
+  }
+
+  @keyframes atacar{
+    100%{background-position: -226px;}
+  }
+}
