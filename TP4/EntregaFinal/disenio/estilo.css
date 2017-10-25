@@ -1,32 +1,47 @@
 body{
   background-color: blue;
 }
+
+.espacio_vidas{
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 18px;
+}
+
+.espacio_puntos{
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+.barra{
+  width:100%;
+  height: 100px;
+  color: white;
+}
+
+.barra output{
+  color: white;
+}
+.mundo{
+  width: 100%;
+  text-align: center;
+}
 #mundo{
   position: relative;
+  background-color: black;
 }
+
 #personaje{
   width: 63px;
   height: 62px;
   background: url('hero.png')0px 612px;
   background-position: 0px 0px;
   position: absolute;
-
 }
 
-#personaje correr{
-    width: 63px;
-    height: 62px;
-    background: url('hero.png')0px 612px;
-    animation: correr 0.6s steps(9);
-
-  }
-  #personaje saltar{
-      width: 63px;
-      height: 62px;
-      background: url('hero.png')0px 612px;
-      animation: saltar 2s steps(8) forwards;
-
-    }
 #escenario{
   width: 1000px;
   height: 524px;
@@ -34,7 +49,6 @@ body{
   background-position: left;
   position: absolute;
   animation: moverE 4s infinite linear;
-  animation-play-state:paused;
 }
 #fondo{
   width: 1000px;
@@ -44,8 +58,6 @@ body{
   position: absolute;
   top: 165px;
   animation: moverF 8s infinite linear;
-  animation-play-state:paused;
-
 }
 
 
@@ -66,15 +78,4 @@ body{
     0%{top: 0px;background-position-y: -516px;}
     50%{top: -100px}
     100%{top: 0px;background-position-x: -515px;background-position-y: -516px}
-  }
-
-#personaje atacar{
-    width: 30px;
-    height: 37.666px;
-    background: url('pj.png')left center;
-    animation: correr 0.6s steps(6);
-  }
-
-  @keyframes atacar{
-    100%{background-position: -226px;}
   }

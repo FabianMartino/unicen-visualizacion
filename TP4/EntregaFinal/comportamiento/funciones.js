@@ -1,7 +1,11 @@
+$("info").hide();
+$(document).ready(function(){
+        $("info").hide();
+      });
 var pj = document.getElementById("personaje");
 var esc = document.getElementById("escenario");
 var fon = document.getElementById("fondo");
-
+var vida = document.getElementById("vidas");
 function Player(){
   this.posX = 300;
   this.posY = 400;
@@ -10,62 +14,61 @@ function Player(){
   this.vidas = 3;
   this.score = 0;
   this.air = false;
+  this.hit = false;
   pj.style.transform = "translate("+this.posX+"px,"+this.posY+"px)";
 };
 
-Player.prototype.correr = function (direccion, pos) {
-  if (!this.air) {
-    pj.style.animation = 'correr 0.6s steps(9) infinite';
-  }
+Player.prototype.correr = function (direccion) {
+
   this.posX+=(10*direccion);
   if (this.posX<0) {
     this.posX=0;
-    M.mover("pausa");
   }
-  if (this.posX>=(pos+500)) {
-    this.posX =500;
-    M.mover("x");
+  if (this.posX>=(900)) {
+    this.posX =900;
+  }
+  if (!this.air) {
+    pj.style.animation = 'correr 0.6s steps(9) infinite';
+    direccion = 1;
   }
   pj.style.transform = "translate("+this.posX+"px,"+this.posY+"px) scale("+direccion+",1)";
 
 };
-
 Player.prototype.saltar = function () {
-
   this.air = true;
-  pj.style.animation = 'saltar 2s steps(8) forwards';
+  pj.style.animation = 'saltar 2s steps(8) normal forwards';
   pj.style.transform = "translate("+this.posX+"px,"+this.posY+"px)";
   pj.addEventListener("animationend", enAire)
 };
+
 function enAire(){
-  this.air = false;
+  P1.air = false;
+  P1.correr(1);
+
 }
 
-Player.prototype.golpeado=function(direccion){
-  if ((x>=this.posX || x<= ( this.posX+this.ancho))&&(y>=this.posY || y<= ( this.posY+this.alto))) {
-  pj.style.animation = 'correr 0.6s steps(9) infinite';
-  this.posX+=(30*direccion);
-  pj.style.transform = "translate("+this.posX+"px,"+this.posY+"px) scale("+direccion+",1)";
+Player.prototype.golpeado=function(x,y,ancho,alto){
+  if (!this.hit) {
+    if (((x+ancho)>=this.posX && x<= ( this.posX+this.ancho))){
+      if (((y+alto)>=this.posY && y<= ( this.posY+this.alto))||(this.air)&&(y>=300)) {
+        this.hit= true;
+        this.vidas--;
+        document.getElementById("vida").innerHTML = this.vidas,
+        setTimeout(invencible, 2000);
+        pj.style.animation = 'correr 0.6s steps(9) infinite';
+      }
+    }
+  }
+  else {
   }
 };
-
-function Mundo(){
-  this.inicio = 0;
-
+function invencible(){
+  P1.hit = false;
 }
 
-Mundo.prototype.mover=function(valor){
-  if (valor == "pausa"){
-    esc.style.animationPlayState ="paused";
-  }
-  else{
-    esc.style.animationPlayState ="running";
-    }
-}
 
 
 var P1 = new Player();
-var M = new Mundo();
 var dir = 0;
 addEventListener("keypress", realizarAccion);
 
@@ -75,11 +78,14 @@ function realizarAccion(e){
   if (e.keyCode == '38') {
    P1.saltar();
   }
+  if (e.keyCode == '40') {
+   P1.golpeado(300,400,63,60);
+  }
   else if (e.keyCode == '37') {
-   P1.correr(-1,M.inicio);
+   P1.correr(-1);
   }
   else if (e.keyCode == '39') {
-   P1.correr(1,M.inicio);
+   P1.correr(1);
   }
 }
 //
@@ -124,3 +130,13 @@ function realizarAccion(e){
 //     }
 //   }
 // }
+function instru(){
+    document.getElementById("info").style.display = "block";
+}
+function startgame(){
+  document.getElementById("empezar").style.display = "none";
+  document.getElementById("instrucciones").style.display = "none";
+  document.getElementById("info").style.display = "none";
+  document.getElementById("mundo").style.display = "block";
+
+}
