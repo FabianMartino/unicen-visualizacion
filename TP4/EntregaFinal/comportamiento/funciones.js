@@ -1,11 +1,10 @@
-$("info").hide();
-$(document).ready(function(){
-        $("info").hide();
-      });
 var pj = document.getElementById("personaje");
 var esc = document.getElementById("escenario");
 var fon = document.getElementById("fondo");
 var vida = document.getElementById("vidas");
+var tecla = "";
+
+
 function Player(){
   this.posX = 300;
   this.posY = 400;
@@ -53,7 +52,9 @@ Player.prototype.golpeado=function(x,y,ancho,alto){
       if (((y+alto)>=this.posY && y<= ( this.posY+this.alto))||(this.air)&&(y>=300)) {
         this.hit= true;
         this.vidas--;
-        document.getElementById("vida").innerHTML = this.vidas,
+        document.getElementById("vida").innerHTML = this.vidas;
+        this.score -=350;
+        document.getElementById("punto").innerHTML = this.score,
         setTimeout(invencible, 2000);
         pj.style.animation = 'correr 0.6s steps(9) infinite';
       }
@@ -66,70 +67,76 @@ function invencible(){
   P1.hit = false;
 }
 
+function Enemigo(){
+  this.pago=false;
+  this.posX=900;
+  this.posY=400;
+  this.ancho=41;
+  this.alto=50;
+  this.dead=-1;
+}
 
-
-var P1 = new Player();
-var dir = 0;
-addEventListener("keypress", realizarAccion);
-
-function realizarAccion(e){
-  e = e || window.event;
-
-  if (e.keyCode == '38') {
-   P1.saltar();
+Enemigo.prototype.pagar = function(x,score){
+  if (this.valor) {
+    if ((this.posX+this.ancho)<x) {
+      this.pago = true;
+      score +=100;
+      document.getElementById("punto").innerHTML = this.score;
+    }
   }
-  if (e.keyCode == '40') {
-   P1.golpeado(300,400,63,60);
-  }
-  else if (e.keyCode == '37') {
-   P1.correr(-1);
-  }
-  else if (e.keyCode == '39') {
-   P1.correr(1);
+};
+
+Enemigo.prototype.nuevo = function(){
+  this.dead=0;
+  setTimeout(this.revivir(),3000)
+}
+
+Enemigo.prototype.revivir = function(){
+  this.pago=false;
+  this.posX=900;
+  this.posY=400;
+  this.dead=1;
+}
+
+Enemigo.prototype.muerto = function(){
+    if (this.posX<=0) {
+      document.getElementById("enemigo").style.display = "none";
+      this.dead=-1;
+      this.posX=1000;
+    }
+}
+
+var perso = ""
+var enem = ""
+
+function Juego(){
+  this.P1 = new Player();
+  console.log(this.P1);
+  this.enemigos = new Enemigo();
+  this.jugando = true;
+  this.actu ="";
+}
+Juego.prototype.actualizar = function(){
+      perso = this.P1;
+      enem = this.enemigos;
+      this.actu = setInterval(function(){funcionando(); }, 50)
+}
+Juego.prototype.endgame = function(){
+  if (!this.jugando) {
+     clearInterval(this.actu);
   }
 }
-//
-// function Juego(){
-//   this.pantalla = new mundo();
-//   this.pj = new Player();
-// //  this.pisos = [];
-//   this.enemigos = [];
-//   this.puntaje = 0;
-// }
-// // Juego.prototype.crearPiso(){
-// //   var i = 0;
-// //   var f = 1500
-// //   while i<9000{
-// //     var temp = new Piso(i,f,0);
-// //     this.pisos = temp;
-// //     i = f + 30;
-// //     f += (Math.Random()*1000)+50;
-// //   }
-// //   var temp = new Piso(i,10000,0);
-// //   this.pisos = temp;
-// // }
-// // Juego.prototype.crearEnemigos(){
-// //
-// // }
-// Juego.prototype.enemigoPantalla=function(){
-//   var resultado = [];
-//   for (var i = 0; i < this.enemigos.length; i++) {
-//     if (this.enemigos[i]>=this.pantalla.inicio&&this.enemigos[i]<=(this.pantalla.inicio+1000)) {
-//       resultado = this.enemigos[i];
-//     }
-//   }
-//   return resultado;
-// }
-// juego.prototype.actualizar=function(){
-//   var enemigos_pantalla = enemigoPantalla();
-//   for (var i = 0; i < enemigos_pantalla.length; i++) {
-//     var golpe = enemigos_pantalla[i].hit(this.pj.posX,this.pj.posY,this.pj.ancho,this.pj.alto);
-//     if (golpe != 0) {
-//       this.pj.golpeado(golpe);
-//       this.pantalla.mover(30*golpe);
-//     }
-//   }
-// }
+
+
+function pressKey(){
+  addEventListener("keypress", realizarAccion);
+  function realizarAccion(e){
+    e = e || window.event;
+    tecla = e.keyCode;
+    return tecla;
+  }
+}
+
 function instru(){
     document.getElementById("info").style.display = "block";
 }
@@ -138,5 +145,22 @@ function startgame(){
   document.getElementById("instrucciones").style.display = "none";
   document.getElementById("info").style.display = "none";
   document.getElementById("mundo").style.display = "block";
+  var game = new Juego();
+  game.actualizar();
+}
 
+function funcionando(per,enem){
+  pressKey();
+  if (tecla == '38') {
+    tecla = "";
+   perso.saltar();
+  }
+  else if (tecla == '37') {
+    tecla = "";
+   perso.correr(-1);
+  }
+  else if (tecla == '39') {
+    tecla = "";
+   perso.correr(1);
+  }
 }

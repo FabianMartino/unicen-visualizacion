@@ -40,6 +40,7 @@ body{
   background: url('hero.png')0px 612px;
   background-position: 0px 0px;
   position: absolute;
+  animation: correr 0.6s steps(9) infinite;
 }
 
 #escenario{
