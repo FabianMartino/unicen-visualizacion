@@ -2,6 +2,7 @@ var pj = document.getElementById("personaje");
 var esc = document.getElementById("escenario");
 var fon = document.getElementById("fondo");
 var vida = document.getElementById("vidas");
+var en = document.getElementById("enemigo");
 var tecla = "";
 
 
@@ -41,22 +42,29 @@ Player.prototype.saltar = function () {
 };
 
 function enAire(){
-  P1.air = false;
-  P1.correr(1);
+  perso.air = false;
+  perso.correr(1);
 
 }
 
 Player.prototype.golpeado=function(x,y,ancho,alto){
   if (!this.hit) {
     if (((x+ancho)>=this.posX && x<= ( this.posX+this.ancho))){
-      if (((y+alto)>=this.posY && y<= ( this.posY+this.alto))||(this.air)&&(y>=300)) {
+      if (!this.air) {
         this.hit= true;
         this.vidas--;
         document.getElementById("vida").innerHTML = this.vidas;
         this.score -=350;
-        document.getElementById("punto").innerHTML = this.score,
+        document.getElementById("punto").innerHTML = this.score;
         setTimeout(invencible, 2000);
         pj.style.animation = 'correr 0.6s steps(9) infinite';
+      }
+      else {
+        if (!enem.pago) {
+          this.score += 100;
+          document.getElementById("punto").innerHTML = this.score;
+          enem.pago = true
+        }
       }
     }
   }
@@ -64,7 +72,7 @@ Player.prototype.golpeado=function(x,y,ancho,alto){
   }
 };
 function invencible(){
-  P1.hit = false;
+  perso.hit = false;
 }
 
 function Enemigo(){
@@ -74,6 +82,9 @@ function Enemigo(){
   this.ancho=41;
   this.alto=50;
   this.dead=-1;
+  en.style.transform = "translate("+this.posX+"px,"+this.posY+"px)";
+  document.getElementById("enemigo").style.display = "block";
+
 }
 
 Enemigo.prototype.pagar = function(x,score){
@@ -88,14 +99,23 @@ Enemigo.prototype.pagar = function(x,score){
 
 Enemigo.prototype.nuevo = function(){
   this.dead=0;
-  setTimeout(this.revivir(),3000)
+  setTimeout(this.revivir(),3000);
 }
-
+Enemigo.prototype.mover = function(){
+  if (this.dead==1) {
+    this.posX -= 10;
+    if (this.posX > 0) {
+      en.style.transform = "translate("+this.posX+"px,"+this.posY+"px)";
+    }
+  }
+}
 Enemigo.prototype.revivir = function(){
   this.pago=false;
   this.posX=900;
   this.posY=400;
   this.dead=1;
+  en.style.transform = "translate("+this.posX+"px,"+this.posY+"px)";
+  document.getElementById("enemigo").style.display = "block";
 }
 
 Enemigo.prototype.muerto = function(){
@@ -108,10 +128,9 @@ Enemigo.prototype.muerto = function(){
 
 var perso = ""
 var enem = ""
-
+var partida = ""
 function Juego(){
   this.P1 = new Player();
-  console.log(this.P1);
   this.enemigos = new Enemigo();
   this.jugando = true;
   this.actu ="";
@@ -119,6 +138,7 @@ function Juego(){
 Juego.prototype.actualizar = function(){
       perso = this.P1;
       enem = this.enemigos;
+      partida = this.actu
       this.actu = setInterval(function(){funcionando(); }, 50)
 }
 Juego.prototype.endgame = function(){
@@ -149,7 +169,7 @@ function startgame(){
   game.actualizar();
 }
 
-function funcionando(per,enem){
+function funcionando(){
   pressKey();
   if (tecla == '38') {
     tecla = "";
@@ -163,4 +183,12 @@ function funcionando(per,enem){
     tecla = "";
    perso.correr(1);
   }
+  if (enem.dead==-1) {
+    enem.nuevo();
+  }
+  else {
+    enem.mover();
+    enem.muerto();
+  }
+  perso.golpeado(enem.posX,enem.posY,enem.ancho,enem.alto);
 }

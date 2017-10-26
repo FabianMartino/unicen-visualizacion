@@ -43,6 +43,15 @@ body{
   animation: correr 0.6s steps(9) infinite;
 }
 
+#enemigo{
+  width: 42.16px;
+  height: 55px;
+  background: url('enemigo.png')left center;
+  background-position:left;
+  position: absolute;
+  animation: enemigoCorrer 0.6s steps(6) infinite;
+}
+
 #escenario{
   width: 1000px;
   height: 524px;
@@ -61,7 +70,9 @@ body{
   animation: moverF 8s infinite linear;
 }
 
-
+  @keyframes enemigoCorrer{
+    100%{background-position-x: -253px}
+  }
   @keyframes moverE{
     100%{background-position-x: -1510px}
   }
