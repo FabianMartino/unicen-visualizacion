@@ -1,0 +1,29 @@
+
+.selector-for-some-widget {
+  box-sizing: content-box;
+}
+
+.contendor_navbar{
+  height: 20%;
+  background-color: blue;
+}
+
+.titulo_navbar{
+}
+.logo_navbar{
+}
+.barra_busqueda{
+}
+
+.boton_busqueda{
+
+}
+nav{
+  color: white;
+}
+#contenido{
+  display: none;
+}
+#contenido button{
+  background-color: white;
+}
