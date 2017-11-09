@@ -1,7 +1,17 @@
 
+body{
+ background-image: url("images/colage.png");
+}
+
+.fondo_inicio{
+
+  height: 250px;
+}
+
 .selector-for-some-widget {
   box-sizing: content-box;
 }
+
 
 .contendor_navbar{
   height: 20%;
@@ -21,9 +31,85 @@
 nav{
   color: white;
 }
-#contenido{
-  display: none;
-}
+
 #contenido button{
   background-color: white;
 }
+.imagenesGaleria img{
+  width: 100%;
+}
+h2{
+  font-style: italic;
+}
+
+.spaces{
+margin-bottom: 3%;}
+
+.largs{
+  height: 90px;
+  padding: 2%;
+  padding-left: 20%;
+}
+a{
+  background-color:blue;
+}
+
+/* ---------------------------------------------------------------------------*/
+/* VISUALES PARA LA ESTATICAS DE LA VISTA 1 = GRILLA    */
+.likes{
+  color: red;  /*para que el corazon y el numero de likes sea en rojo*/
+}
+
+/* ---------------------------------------------------------------------------*/
+/* VISUALES PARA LA ESTATICAS DE LA VISTA 2 = CARRUSEL    */
+.imagen_muestra_v2{
+  border: 2px solid blue;
+  background-color: black;
+  width: 100%;
+  height: 500px;
+  text-align:center;
+
+}
+
+.imagen_muestra_v2  img{
+  width: auto;
+  height: 100%;
+  vertical-align:middle;
+}
+
+.imagen_chica_v2{
+  width: auto;
+  height: 200px;
+  text-align:center;
+
+}
+
+.imagen_chica_v2  img{
+  width: 100%;
+  height: 100%;
+  vertical-align:middle;
+}
+
+.imagen_flecha{
+
+  width: 50px;
+  height: 50px;
+  text-align:center;
+  vertical-align:middle;
+}
+
+.voltear{
+  transform: scale(-1,1);
+}
+/* ---------------------------------------------------------------------------*/
+/* VISUALES PARA LA ESTATICAS DE LA VISTA 3 = Imagen cambiante    */
+.sright{
+  position:relative;
+  left:100%;
+}
+
+.grados90{
+  transform: rotate(90deg);
+}
+
+/* ---------------------------------------------------------------------------*/
