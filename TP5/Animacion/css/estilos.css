@@ -1,18 +1,8 @@
 
-body{
- background-image: url("images/colage.png");
- background-repeat: no-repeat;
- background-size: cover;
-}
-#paginaInicio{
-}
 
-#paginaGaleria{
- background-image: url("images/background_t.png");
- display: none;
-}
 
 .fondo_inicio{
+
   height: 250px;
 }
 
@@ -58,7 +48,9 @@ margin-bottom: 3%;}
   padding: 2%;
   padding-left: 20%;
 }
-
+a{
+  background-color:blue;
+}
 
 /* ---------------------------------------------------------------------------*/
 /* VISUALES PARA LA ESTATICAS DE LA VISTA 1 = GRILLA    */

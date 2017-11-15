@@ -1,0 +1,76 @@
+
+
+
+.like_container{
+  margin:50px;
+}
+
+.likes{
+  color: red;  /*para que el corazon y el numero de likes sea en rojo*/
+  font-size: 25px;
+  text-align: center;
+}
+
+.num_likes{
+  padding-top: 9px;
+  text-align: left;
+}
+
+
+@keyframes latidos {
+    from { transform: none; }
+    50% { transform: scale(2); }
+    to { transform: none; }
+}
+
+@keyframes gira {
+       25%{transform:rotateX(180deg);}
+       50%{transform:rotateY(180deg); }
+       75%{transform:rotateY(180deg);transform:rotateX(480deg);}
+       100%{ transform:rotateX(360deg); }
+}
+
+@keyframes gira2 {
+       
+       50%{transform:rotateY(180deg); }
+       100%{ transform:rotateX(360deg); }
+}
+
+@keyframes colores {
+  12%{color:red;}
+  24%{color:orange;}
+  36%{color:yellow;}
+  48%{color:green;}
+  60%{color:#ADD8E6;}
+  72%{color:blue;}
+  84%{color:purple;}
+  100%{color:red;}
+
+}
+
+
+
+.latiendo{
+  animation: latidos 1s infinite;
+}
+
+
+.girando{
+  
+  animation: gira 5s infinite;
+  font-size: 35px;
+
+}
+
+.girando2{
+  
+  animation: gira2 2s infinite;
+  font-size: 35px;
+
+}
+
+.arcoiris{
+  animation: colores 10s infinite;
+  font-size: 35px;
+
+}

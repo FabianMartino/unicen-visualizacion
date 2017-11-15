@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>Hello, world!</title>
+    <title>ImageDetective</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,40 +14,70 @@
 
   </head>
   <body>
-    <div class="row">
-      <div class="fondo_inicio col-sm-12">
-        <p></p>
+    <div id="paginaInicio">
+      <div class="row">
+        <div class="fondo_inicio col-sm-12">
+          <p></p>
+        </div>
+      </div>
+      <nav class="navbar navbar-inverse bg-primary largs">
+        <div class="row">
+          <div class="col-sm-3">
+            <h2>#ImageDetective</h2>
+          </div>
+          <div class="col-sm-5">
+            <form id="primerFormulario" class="form-horizontal">
+              <div class="input-group">
+                <input type="text" class="form-control" id="primerHash" placeholder="#Busqueda" aria-describedby="basic-addon1" size="100" name="buscar" required>
+                <button type="submit" name="button" id="primeraBusqueda" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-4">
+            <img src="logo.png" alt="">
+          </div>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="fondo_inicio col-sm-12">
+          <p> </p>
+        </div>
       </div>
     </div>
-    <nav class="navbar navbar-inverse bg-primary largs">
-      <div class="row">
-        <div class="col-sm-3">
-          <h2>#ImageDetective</h2>
+    <div id="paginaGaleria">
+      <nav class="navbar navbar-inverse bg-primary">
+        <div class="row">
+          <div class="col-sm-6">
+            <h2>#ImageDetective</h2>
+          </div>
+          <div class="col-sm-5">
+            <form class="form-inline" id="hash">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Tu busqueda" aria-describedby="basic-addon1" size="100" name="buscar" required>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-sm-1">
+            <img src="logo.png" alt="">
+          </div>
         </div>
-        <div class="col-sm-5">
-          <form class="form-inline" id="hash">
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">#</span>
-              <input type="text" class="form-control" placeholder="Tu busqueda" aria-describedby="basic-addon1" size="100" name="buscar" required>
-                <a href="vista1.html" class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar </a>
-            </div>
-          </form>
+      </nav>
+      <div style="margin:1%">
+        <div id="muestra" class="spaces">
+          <button type="button" name="button"id="grilla"><i class="fa fa-th" aria-hidden="true"></i></button>  |  <button type="button" name="button" id="exposicion"><img src="css/images/vista_2.png" alt=""></img></button>  |  <button type="button" name="button" id="presentacion"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
         </div>
-        <div class="col-sm-4">
-          <img src="logo.png" alt="">
+        <div id="contenido">
+
         </div>
-      </div>
-    </nav>
-    <div class="row">
-      <div class="fondo_inicio col-sm-12">
-        <p> </p>
-      </div>
     </div>
 
+
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 	  <script src="js/bootstrap.min.js"></script>
-  <!--  <script type="text/javascript" src="js/cd/codebird.js"></script> -->
-  <!--  <script type="text/javascript" src="js/function.js"></script> -->
+    <script type="text/javascript" src="js/cd/codebird.js"></script>
+    <script type="text/javascript" src="js/function.js"></script>
 
       <!--
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
