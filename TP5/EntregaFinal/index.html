@@ -10,6 +10,9 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/estilos.css" type="text/css" rel="stylesheet" >
+    <link href="css/fotos_animaciones.css" type="text/css" rel="stylesheet" >
+    <link href="css/like.css" type="text/css" rel="stylesheet" >
+
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   </head>
@@ -23,13 +26,13 @@
       <nav class="navbar navbar-inverse bg-primary largs">
         <div class="row">
           <div class="col-sm-3">
-            <h2>#ImageDetective</h2>
+            <h1>#ImageDetective</h1>
           </div>
           <div class="col-sm-5">
             <form id="primerFormulario" class="form-horizontal">
               <div class="input-group">
                 <input type="text" class="form-control" id="primerHash" placeholder="#Busqueda" aria-describedby="basic-addon1" size="100" name="buscar" required>
-                <button type="submit" name="button" id="primeraBusqueda" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
+                <button type="submit" name="button" id="primeraBusqueda" class="btn btn-secondary">Buscar</button>
               </div>
             </form>
           </div>
@@ -48,13 +51,13 @@
       <nav class="navbar navbar-inverse bg-primary">
         <div class="row">
           <div class="col-sm-6">
-            <h2>#ImageDetective</h2>
+            <h1>#ImageDetective</h1>
           </div>
           <div class="col-sm-5">
             <form class="form-inline" id="hash">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Tu busqueda" aria-describedby="basic-addon1" size="100" name="buscar" required>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                <button class="btn btn-secondary" id="nuevoHash" type="submit">Buscar</button>
               </div>
             </form>
           </div>
@@ -64,11 +67,13 @@
         </div>
       </nav>
       <div style="margin:1%">
-        <div id="muestra" class="spaces">
-          <button type="button" name="button"id="grilla"><i class="fa fa-th" aria-hidden="true"></i></button>  |  <button type="button" name="button" id="exposicion"><img src="css/images/vista_2.png" alt=""></img></button>  |  <button type="button" name="button" id="presentacion"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
+        <div id="muestra">
+          <button type="button" name="button"id="grilla"><i class="fa fa-th" aria-hidden="true"></i></button>
+          <button type="button" name="button" id="exposicion"><img src="css/images/vista_2.png" alt=""></img></button>
+          <button type="button" name="button" id="presentacion"><i class="fa fa-picture-o" aria-hidden="true"></i></button>
         </div>
-        <div id="contenido">
-
+        <div id="contenido"class="row justify-content-center">
+          <div class="loader"></div>
         </div>
     </div>
 
@@ -78,6 +83,7 @@
 	  <script src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/cd/codebird.js"></script>
     <script type="text/javascript" src="js/function.js"></script>
+    <script type="text/javascript" src="js/presentacion.js"></script>
 
       <!--
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

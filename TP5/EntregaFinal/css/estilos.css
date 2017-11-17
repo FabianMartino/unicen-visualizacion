@@ -20,6 +20,9 @@ body{
   box-sizing: content-box;
 }
 
+.user{
+  top: 5px;
+}
 
 .contendor_navbar{
   height: 20%;
@@ -43,11 +46,60 @@ nav{
 #contenido button{
   background-color: white;
 }
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+#galeria3{
+  background-color: lightgray;
+  width: 700px;
+  height: 550px;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 8px;
+  border-color: lightgray;
+  margin: 20px;
+}
+
+#galeria3 img{
+  width: 100%;
+  height: 100%;
+  margin-top: 5%;
+}
+
+.imagenesgrilla{
+  background-color: lightgray;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 8px;
+  border-color: lightgray;
+  margin: 20px;
+}
+.imagenesgrilla img{
+  width: 100%;
+  height: 200px;
+  margin-top: 5%;
+}
+
 .imagenesGaleria img{
   width: 100%;
 }
-h2{
+
+h1{
   font-style: italic;
+  font-family: Vivaldi, Helvetica, sans-serif;
 }
 
 .spaces{
@@ -58,26 +110,26 @@ margin-bottom: 3%;}
   padding: 2%;
   padding-left: 20%;
 }
-
-
+#galeria1{
+  width: 100%
+}
+#grillaCompleta{
+  width: 100%
+}
 /* ---------------------------------------------------------------------------*/
 /* VISUALES PARA LA ESTATICAS DE LA VISTA 1 = GRILLA    */
-.likes{
-  color: red;  /*para que el corazon y el numero de likes sea en rojo*/
-}
+
 
 /* ---------------------------------------------------------------------------*/
 /* VISUALES PARA LA ESTATICAS DE LA VISTA 2 = CARRUSEL    */
-.imagen_muestra_v2{
-  border: 2px solid blue;
-  background-color: black;
-  width: 100%;
-  height: 500px;
+.imagenesExposicion{
+  width: 80%;
+  height:400px;
   text-align:center;
-
+  margin-bottom: 10px;
 }
 
-.imagen_muestra_v2  img{
+.imagenesExposicion  img{
   width: auto;
   height: 100%;
   vertical-align:middle;
@@ -85,7 +137,7 @@ margin-bottom: 3%;}
 
 .imagen_chica_v2{
   width: auto;
-  height: 200px;
+  height: 100px;
   text-align:center;
 
 }
@@ -109,6 +161,19 @@ margin-bottom: 3%;}
 }
 /* ---------------------------------------------------------------------------*/
 /* VISUALES PARA LA ESTATICAS DE LA VISTA 3 = Imagen cambiante    */
+.datosv3{
+  margin: 15px;
+}
+
+.imagenesPresentacion{
+  width: 100%;
+  max-height: 500px;
+}
+.imagenesPresentacion img{
+  width: 100%;
+  height: 500px;
+}
+
 .sright{
   position:relative;
   left:100%;
@@ -119,3 +184,68 @@ margin-bottom: 3%;}
 }
 
 /* ---------------------------------------------------------------------------*/
+@keyframes banish{
+    from { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes opacar{
+    from { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.opacoAtrans{
+  animation: banish 1s;
+
+}
+
+.trasAopaco{
+  animation: opacar 1s;
+}
+
+@keyframes banish{
+    from { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+@keyframes opacar{
+    from { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.fondo_negro{
+  background-color: black;
+}
+
+.hide{
+  opacity: 0;
+}
+
+.opacar:hover img {
+animation: banish 1s;
+opacity: 0.3;
+
+}
+
+.opacar:hover .hide {
+  animation: opacar 1s;
+  opacity: 1;
+}
+
+.opacar img {
+  animation: opacar 0.3s;
+  opacity: 1;
+
+}
+
+.absolute{
+  position: absolute;
+  left: 30%;
+  top: 2%;
+  z-index: 10;
+}
+
+.center{
+  left: 45%;
+  top: 30%;
+}
