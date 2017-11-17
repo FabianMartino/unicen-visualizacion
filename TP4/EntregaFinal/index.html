@@ -2,28 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>videojuego</title>
+		<title>SpaceRunner</title>
 		<link rel="stylesheet" href="disenio\bootstrap.css" media="screen" title="no title" charset="utf-8">
 		<link rel="stylesheet" href="disenio\estilo.css" media="screen" title="no title" charset="utf-8">
 		<script src="comportamiento\jquery.js"></script>
 	</head>
 	<body>
 		<div class="barra">
-			<div class="espacio_vidas">
+			<div class="text-center espacio_vidas">
 				<span>vida</span><output id="vida"name="vida">3</output>
 			</div>
-			<div class="espacio_puntos">
+			<div class="text-center espacio_puntos">
 				<span>score</span><output id="punto"name="punto">0</output>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-1"id="left">
+		<div class="contenido row">
+			<div class="col-sm-2"id="left">
 			</div>
-				<div class="col-sm-10">
-					<div class="menu">
+				<div class="col-sm-8">
+					<div id="menu" class="text-center menu">
 						<button type="button" id="empezar" onclick="startgame()">Start</button>
 						<button type="button" id="instrucciones" onclick="instru()">Instrucciones</button>
-						<p id="info" style="display: none">utilice la tecla up para saltar y left y right para mover al avatar hacia la izquierda o a la derecha</p>
+						<p id="resultado"></p>
+						<p id="info" style="display: none">Utilice la tecla up para saltar y left y right para mover al avatar hacia la izquierda o a la derecha. Saltar sobre los enemigos que pararecenles suma puntos pero al ser golpeado se les resta vidas y puntos al jugador</p>
 					</div>
 					<div id="mundo" style="display: none">
 						<div id="fondo"></div>
@@ -32,7 +33,7 @@
 						<div id="enemigo"></div>
 					</div>
 			</div>
-			<div class="col-sm-1"id="right">
+			<div class="col-sm-2"id="right">
 			</div>
 		</div>
 

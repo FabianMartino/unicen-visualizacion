@@ -28,29 +28,58 @@ Player.prototype.correr = function (direccion) {
     this.posX =900;
   }
   if (!this.air) {
-    pj.style.animation = 'correr 0.6s steps(9) infinite';
+    pj.style.animation = 'correr '+(6+(direccion*(-2)))/10+'s steps(9) infinite';
     direccion = 1;
   }
   pj.style.transform = "translate("+this.posX+"px,"+this.posY+"px) scale("+direccion+",1)";
 
 };
+function bajar(){
+  if (contadorSaltos>0) {
+    console.log(contadorSaltos);
+    contadorSaltos--;
+    var posY = 300;
+    perso.posY+=5;
+    pj.style.transform = "translate("+perso.posX+"px,"+perso.posY+"px)";
+  }
+  else {
+    perso.air = false;
+    perso.correr(1);
+    clearInterval(saltando);
+
+  }
+}
+function subir(){
+  if (contadorSaltos<20) {
+    console.log(contadorSaltos);
+    var posY = 400;
+    perso.posY-=5;
+    contadorSaltos++;
+    pj.style.transform = "translate("+perso.posX+"px,"+perso.posY+"px)";
+  }
+  else {
+    clearInterval(saltando);
+    saltando = setInterval(function (){bajar();},50);
+    console.log("termino con "+contadorSaltos);
+  }
+}
+var contadorSaltos = 0;
+var saltando = "";
 Player.prototype.saltar = function () {
   this.air = true;
   pj.style.animation = 'saltar 2s steps(8) normal forwards';
-  pj.style.transform = "translate("+this.posX+"px,"+this.posY+"px)";
-  pj.addEventListener("animationend", enAire)
+  var x = this.posX;
+  var y = this.posY;
+  saltando = setInterval(function (){
+    subir();},50);
 };
 
-function enAire(){
-  perso.air = false;
-  perso.correr(1);
 
-}
 
 Player.prototype.golpeado=function(x,y,ancho,alto){
   if (!this.hit) {
     if (((x+ancho)>=this.posX && x<= ( this.posX+this.ancho))){
-      if (!this.air) {
+      if ((this.posY+this.alto)>y) {
         this.hit= true;
         this.vidas--;
         document.getElementById("vida").innerHTML = this.vidas;
@@ -78,7 +107,7 @@ function invencible(){
 function Enemigo(){
   this.pago=false;
   this.posX=900;
-  this.posY=400;
+  this.posY=410;
   this.ancho=41;
   this.alto=50;
   this.dead=-1;
@@ -112,7 +141,7 @@ Enemigo.prototype.mover = function(){
 Enemigo.prototype.revivir = function(){
   this.pago=false;
   this.posX=900;
-  this.posY=400;
+  this.posY=410;
   this.dead=1;
   en.style.transform = "translate("+this.posX+"px,"+this.posY+"px)";
   document.getElementById("enemigo").style.display = "block";
@@ -129,6 +158,7 @@ Enemigo.prototype.muerto = function(){
 var perso = ""
 var enem = ""
 var partida = ""
+var game = ""
 function Juego(){
   this.P1 = new Player();
   this.enemigos = new Enemigo();
@@ -139,11 +169,14 @@ Juego.prototype.actualizar = function(){
       perso = this.P1;
       enem = this.enemigos;
       partida = this.actu
-      this.actu = setInterval(function(){funcionando(); }, 50)
+      partida = setInterval(function(){funcionando(); }, 50)
 }
 Juego.prototype.endgame = function(){
   if (!this.jugando) {
-     clearInterval(this.actu);
+     clearInterval(partida);
+     document.getElementById("menu").style.display = "block";
+     document.getElementById("mundo").style.display = "none";
+     document.getElementById("resultado").innerHTML = "Tu puntuacion es de "+perso.score;
   }
 }
 
@@ -161,11 +194,12 @@ function instru(){
     document.getElementById("info").style.display = "block";
 }
 function startgame(){
-  document.getElementById("empezar").style.display = "none";
-  document.getElementById("instrucciones").style.display = "none";
-  document.getElementById("info").style.display = "none";
+  document.getElementById("menu").style.display = "none";
   document.getElementById("mundo").style.display = "block";
-  var game = new Juego();
+
+  game = new Juego();
+  document.getElementById("vida").innerHTML = game.P1.vidas;
+  document.getElementById("punto").innerHTML = game.P1.score;
   game.actualizar();
 }
 
@@ -191,4 +225,8 @@ function funcionando(){
     enem.muerto();
   }
   perso.golpeado(enem.posX,enem.posY,enem.ancho,enem.alto);
+  if (perso.vidas==0) {
+    game.jugando=false;
+    game.endgame();
+  }
 }
